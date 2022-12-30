@@ -1,0 +1,34 @@
+[package]
+name = "announce"
+version = "0.2.0"
+edition = "2021"
+authors = ["Thomas Eppers"]
+license-file = "LICENSE.txt"
+keywords = ["message", "communication", "notify", "notification", "REST"]
+categories = ["accessibility", "api-bindings", "asynchronous"]
+description = "Sends messages to supported services from an url format."
+readme = "Readme.md"
+repository = "https://github.com/eppixx/announce"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+
+# https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
+[dependencies]
+# announce-lib = { git = "https://github.com/eppixx/announce-lib" }
+announce_lib = { path = "../announce-lib" }
+tokio = { version = "1.23.0", features = ["rt-multi-thread"] }
+clap = { version = "4.0.32", features = ["derive"] }
+clap_derive = "4.0.21"
+url = "2.3.1"
+
+
+# https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#development-dependencies
+[dev-dependencies]
+
+
+# https://doc.rust-lang.org/cargo/reference/features.html
+[features]
+
+[[bin]]
+name = "announce"
+
