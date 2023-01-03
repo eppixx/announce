@@ -30,9 +30,15 @@ async fn main() {
     let ann = announce_lib::Announce::new()
         .await
         .expect("init announce failed");
-    ann.announce(urls, &message)
-        .await
-        .expect("error while announcing");
+
+    if args.ignore_errors {
+        ann.announce_ignore_errors(urls, &message).await;
+    } else {
+        match ann.announce(urls, &message).await {
+            Ok(_) => {}
+            Err(e) => println!("An error occured: {}", e),
+        }
+    }
 }
 
 /// By specifing a url you can send messages and files to supported services
@@ -57,4 +63,8 @@ struct Args {
     /// Notify with a link. Some services highlight links
     #[arg(short, long)]
     link: Option<String>,
+
+    /// Ignores errors. Also supresses error messages
+    #[arg(short, long)]
+    ignore_errors: bool,
 }
